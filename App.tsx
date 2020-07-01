@@ -13,6 +13,7 @@ import {SafeAreaView, Text, StatusBar, View, Button} from 'react-native';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -21,16 +22,28 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-        </Stack.Navigator>
+        <Tab.Navigator>
+          <Tab.Screen name="TabOne" component={TabOne} />
+          <Tab.Screen name="TabTwo" component={TabOne} />
+        </Tab.Navigator>
       </NavigationContainer>
     </>
   );
 };
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function TabOne() {
+  return (
+    <>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </>
+  );
+}
 
 function HomeScreen({navigation}) {
   return (
@@ -49,7 +62,8 @@ function HomeScreen({navigation}) {
 function DetailsScreen() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
+      <Text>Details Screen </Text>
+      <Text> More of Details</Text>
     </View>
   );
 }
